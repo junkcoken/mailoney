@@ -17,6 +17,7 @@ import json
 
 sys.path.append("../")
 import mailoney
+import sendmail
 
 output_lock = threading.RLock()
 hpc,hpfeeds_prefix = mailoney.connect_hpfeeds()
@@ -316,6 +317,13 @@ def module():
             log_to_file(mailoney.logpath+"/mail.log", peer[0], peer[1], 'Mail to: {0}'.format(", ".join(rcpttos)))
             log_to_file(mailoney.logpath+"/mail.log", peer[0], peer[1], 'Data:')
             log_to_file(mailoney.logpath+"/mail.log", peer[0], peer[1], data)
+
+            #print mailfrom
+            #print rcpttos[0]
+            #print data
+
+            if len(data) <= 20:
+            	sendmail.sendmail(34280, mailfrom, rcpttos, data)
 
             loghpfeeds = {}
             loghpfeeds['ServerName'] = mailoney.srvname
