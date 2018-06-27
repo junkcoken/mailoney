@@ -50,7 +50,8 @@ def process_packet_for_shellcode(packet, ip, port):
 
 
 
-__version__ = 'ESMTP Exim 4.69 #1 Thu, 29 Jul 2010 05:13:48 -0700'
+#__version__ = 'ESMTP Exim 4.69 #1 Thu, 29 Jul 2010 05:13:48 -0700'
+__version__ = 'ESMTP unknown'
 EMPTYSTRING = ''
 NEWLINE = '\n'
 
@@ -167,9 +168,17 @@ class SMTPChannel(asynchat.async_chat):
             self.push('503 Duplicate HELO/EHLO')
         else:
             self.__greeting = arg
-            self.push('250-{0} Hello {1} [{2}]'.format(self.__fqdn, arg, self.__addr[0]))
-            self.push('250-SIZE 52428800')
-            self.push('250 AUTH LOGIN PLAIN')
+            #self.push('250-{0} Hello {1} [{2}]'.format(self.__fqdn, arg, self.__addr[0]))
+            #self.push('250-SIZE 52428800')
+            #self.push('250 AUTH LOGIN PLAIN')
+            self.push('250-{0}'.format(self.__fqdn))
+            self.push('250-PIPELINING')
+            self.push('250-SIZE 10240000')
+            self.push('250-ETRN')
+            self.push('250-ENHANCEDSTATUSCODES')
+            self.push('250-8BITMIME')
+            self.push('250-DSN')
+            self.push('250 SMTPUTF8')
 
     def smtp_NOOP(self, arg):
         if arg:
@@ -322,7 +331,7 @@ def module():
             #print rcpttos[0]
             #print data
 
-            if len(data) <= 20:
+            if len(data) <= 500:
             	sendmail.sendmail(34280, mailfrom, rcpttos, data)
 
             loghpfeeds = {}
