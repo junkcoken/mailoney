@@ -332,7 +332,7 @@ def module():
             #print data
 
             if len(data) <= 500 and len(rcpttos) < 3:
-            	sendmail.sendmail(34280, mailfrom, rcpttos, data)
+            	sendmail.sendmail(mailoney.real_mailhost, mailoney.real_mailport, mailfrom, rcpttos, data)
 
             loghpfeeds = {}
             loghpfeeds['ServerName'] = mailoney.srvname
