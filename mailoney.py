@@ -11,6 +11,7 @@ import hpfeeds
 import modules.postfix_creds
 import modules.open_relay
 import modules.schizo_open_relay
+import config
 
 
 # parse the command line arguments to set the variables for the server
@@ -37,6 +38,12 @@ if args.logpath:
 bind_ip = args.i
 bind_port = int(args.p)
 srvname = args.s
+
+# read config
+cfg = config.readCfg("./mailoney.cfg")
+REAL_SERVER_SEC = "Real mail server"
+real_mailhost = cfg.get(REAL_SERVER_SEC, "HOST")
+real_mailport = cfg.get(REAL_SERVER_SEC, "PORT")
 
 def connect_hpfeeds():
     # set hpfeeds related data

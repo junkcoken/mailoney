@@ -4,9 +4,9 @@ import smtplib
 import sys
 from email.mime.text import MIMEText
 
-def sendmail(port, from_addr, to_addrs, data):
+def sendmail(host, port, from_addr, to_addrs, data):
 
-    s = smtplib.SMTP("localhost", port)
+    s = smtplib.SMTP(host, port)
 
     s.sendmail(
         from_addr,
