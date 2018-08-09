@@ -1,13 +1,13 @@
 # About
 これはmailoneyを改造したものです。スパマーによるメール送受信確認の対策をしています。  
-本家mailoney→ https://github.com/awhitehatter/mailoney
+本家mailoney→ https://github.com/awhitehatter/mailoney
 
 # Installation
 現在hpfeedsがないと動かないっぽいので先にそれをインストールしてください  
 https://github.com/rep/hpfeeds
 
-また、postfix等のSMTPサーバが必要なのでインストールして、メールの送信ができるようにしてください。その際、25番ポートで動かさないようにポートの設定を変更してください。
-設定は人それぞれ違ってくるので割愛します。
+また、postfix等のSMTPサーバが必要なのでインストールして、メールの送信ができるようにしてください。その際、25番ポートで動かさないようにポートの設定を変更してください。
+設定は人それぞれ違ってくるので割愛します。
 
 # Running example
 mailney用のユーザを作成し、ユーザとホームディレクトリを切り替え、その上で操作を行ってください。
@@ -15,15 +15,15 @@ mailney用のユーザを作成し、ユーザとホームディレクトリを�
 $ sudo adduser --disabled-password mailoney
 $ sudo su - mailoney
 $ git clone https://github.com/junkcoken/mailoney.git
-$ cd mailoney
+$ cd mailoney
 $ python mailoney.py -p 2525 -s [mail host name] -t schizo_open_relay &
 ```
 
 ## Settings
-mailoney.cfgにpostfix等のメールサーバの設定を記述します。  
+mailoney.cfgにpostfix等のメールサーバの設定を記述します。  
 ```
 [Real mail server]
-HOST = localhost   # ホスト名・ipアドレスを記述します。多くの場合はlocalhostのままで大丈夫です。
+HOST = localhost   # ホスト名・ipアドレスを記述します。多くの場合はlocalhostのままで大丈夫です。
 PORT = 34280       # SMTPサーバを動かしているポート番号を記述してください。
 ```
 
@@ -54,7 +54,7 @@ optional arguments:
   	schizo_open_relay}
 ```
 
-※この改造はschizo_open_relayのみ対応しています。
+※この改造はschizo_open_relayのみ対応しています。
 
 # ToDo 
  - [ ] Add modules for EXIM, Microsoft, others
